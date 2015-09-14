@@ -1,0 +1,17 @@
+<div class='modal'>
+    <ion-header-bar>
+        <button class='button button-light pull-left' ng-click='myfullScreen()'>全屏</button>
+        <h1 class='title' align-title="center">实时视频</h1>
+        <button class='button button-balanced' ng-click='stopVideo()'>关闭</button>
+    </ion-header-bar>
+    <ion-content>
+        <video id='video-live' autoplay controls ng-src='{{currentCamera.mediaURL}}'/>
+        <div class='list'>
+            <div class='item'>摄像机名字:{{currentCamera.cameraName}}</div>
+            <div class='item'>摄像机ID:{{currentCamera.cameraId}}</div>
+            <div class='item'>地理位置:{{currentCamera.postion}}</div>
+            <div class='item'>备注:{{currentCamera.comment}}</div>
+            <button class='item button button-block button-balanced'ng-click="refreshVideo()">刷新</button>
+        </div>
+    </ion-content>
+</div>

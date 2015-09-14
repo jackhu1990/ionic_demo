@@ -1,0 +1,8 @@
+[
+  {"id":"BA","name":"楼控系统","sref":"systems.ba","p1name":"冷机","p1value":"0","p2name":"新风机组","p2value":"0","p3name":"空调机组","p3value":"0","p4name":"吊装空调","p4value":"0"},
+  {"id":"ETD","name":"配电系统","sref":"systems.etd","p1name":"1T","p1value":"0","p2name":"2T","p2value":"0","p3name":"3T","p3value":"0","p4name":"4T","p4value":"0"},
+  {"id":"FAS","name":"消防报警","sref":"systems.fas","p1name":"烟感报警","p1value":"0","p2name":"温感报警","p2value":"0","p3name":"手动报警","p3value":"0","p4name":"其他","p4value":"0"},
+  {"id":"MJ","name":"门禁系统","sref":"systems.mj","p1name":"总数","p1value":"0","p2name":"开启","p2value":"0","p3name":"关闭","p3value":"0","p4name":"故障","p4value":"0"},
+  {"id":"ZM","name":"照明系统","sref":"systems.zm","p1name":"总数","p1value":"0","p2name":"开启","p2value":"0","p3name":"关闭","p3value":"0","p4name":"故障","p4value":"0"},
+  {"id":"ENERGY","name":"能耗统计","sref":"systems.energy","p1name":"今日总能耗","p1value":"0","p2name":"运行模式","p2value":"节能","p3name":"历史总能耗","p3value":"0","p4name":"故障","p4value":"0"}
+]

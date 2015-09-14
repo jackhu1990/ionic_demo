@@ -1,0 +1,11 @@
+<ion-view view-title="{{title}}" align-title="center">
+    <ion-content>
+        <ul class="list">
+            <li class="item center icon ion-ios-videocam" ng-click="startVideo(item)" ng-repeat="item in camerasItems"  ng-class="{odd:!($index%2),even:($index%2)}">
+                {{item.cameraName}}
+            </li>
+        </ul>
+    </ion-content>
+
+</ion-view>
+

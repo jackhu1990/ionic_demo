@@ -1,0 +1,52 @@
+.inline-block{
+    display: inline-block;
+    padding: .5em .5em;
+}
+.center{
+    text-align: center;
+}
+#overview .item {
+    margin:5px;
+    width:45%;
+}
+#overview .item > div {
+    font-size: 14px;
+    background-color:#f4f4f4;
+    margin-bottom:5px;
+}
+
+#overview h3{
+    background: #33cd5f;
+    color:#ffffff;
+    padding:5px;
+    font-size:24px;
+    font-family: "Roboto", "Microsoft YaHei", "SimSun",
+    "Arial Narrow", HELVETICA;
+}
+#overview h3 a{
+    color:#ffffff;
+}
+#overview h3 a:active{
+    color:#c0c0c0;
+}
+#BA h3{
+    background: #33cd5f;
+}
+#ETD h3{
+    background: #0055aa;
+}
+#FAS h3{
+    background: #770088;
+}
+#MJ h3{
+    background: #aa5500;
+}
+#ZM h3{
+    background: #33cd5f;
+}
+#ENERGY h3{
+    background: #6b46e5;
+}
+#overview a{
+    text-decoration:none;
+}

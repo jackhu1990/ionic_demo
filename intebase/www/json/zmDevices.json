@@ -1,0 +1,47 @@
+[
+  {
+    "name":"1号照明线路",
+    "sref": "systems.zmdevice",
+    "img":"ZM.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"10"
+  },
+  {
+    "name":"2号照明线路",
+    "sref": "systems.zmdevice",
+    "img":"ZM.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"3号照明线路",
+    "sref": "systems.zmdevice",
+    "img":"ZM.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"4号照明线路",
+    "sref": "systems.zmdevice",
+    "img":"ZM.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"5号照明线路",
+    "sref": "systems.zmdevice",
+    "img":"ZM.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":""
+  }
+]

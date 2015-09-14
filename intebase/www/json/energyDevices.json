@@ -1,0 +1,38 @@
+[
+  {
+    "name":"总用电",
+    "sref": "systems.device",
+    "img":"NHTJ.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"10"
+  },
+  {
+    "name":"公共用电",
+    "sref": "systems.device",
+    "img":"NHTJ.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"物业用电",
+    "sref": "systems.device",
+    "img":"NHTJ.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"其他用电",
+    "sref": "systems.device",
+    "img":"NHTJ.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  }
+]

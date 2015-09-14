@@ -1,0 +1,17 @@
+<!--单一设备的通用模版-->
+<ion-view view-title="{{title}}" align-title="center">
+    <ion-content>
+        <ul class="list">
+            <li class="item item-toggle">
+                {{device.name}}的{{device.p1name}}
+                <label class="toggle toggle-assertive">
+                    <input type="checkbox">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </li>
+            <a ng-click="goSystem('systems.charts',{name:device.p2name,value:device.p2value})" class="item">{{device.name}}的{{device.p2name}}历史能耗图表</a>
+        </ul>
+    </ion-content>
+</ion-view>

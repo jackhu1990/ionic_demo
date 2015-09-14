@@ -1,0 +1,19 @@
+<!--设备列表模版-->
+<ion-view view-title="{{title}}" align-title="center">
+    <ion-content>
+        <div class="list card" id="devices">
+            <a class="item item-thumbnail-left" ng-click="goSystem(item.sref,item)"  ng-repeat="item in devicesItems">
+                <img ng-src="img/{{item.img}}">
+                <h2>{{item.name}}</h2>
+                <div>
+                    <span>{{item.p1name}}</span>
+                    <span>{{item.p1value}}</span>
+                </div>
+                <div>
+                    <span>{{item.p2name}}</span>
+                    <span>{{item.p2value}}</span>
+                </div>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

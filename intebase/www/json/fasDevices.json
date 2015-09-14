@@ -1,0 +1,47 @@
+[
+  {
+    "name":"1号风机盘管",
+    "sref": "systems.device",
+    "img":"FJPG.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"10"
+  },
+  {
+    "name":"2号风机盘管",
+    "sref": "systems.device",
+    "img":"FJPG.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"3号风机盘管",
+    "sref": "systems.device",
+    "img":"FJPG.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"4号风机盘管",
+    "sref": "systems.device",
+    "img":"FJPG.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"5号风机盘管",
+    "sref": "systems.device",
+    "img":"FJPG.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  }
+]

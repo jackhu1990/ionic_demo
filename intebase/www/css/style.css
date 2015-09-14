@@ -1,0 +1,42 @@
+/* Empty. Add your own CSS if you like */
+body{
+    background-color: #f8f8f8 !important;
+    font: 14px/20px "Roboto", "Microsoft YaHei", "SimSun",
+    "Arial Narrow", HELVETICA;
+    color: #000;
+    /*background-image:url(../img/background.png);*/
+}
+.scroll-conten {
+    background-color: #f8f8f8 !important;
+}
+#alarmlogs span{
+    float:left;margin-right:20px;
+}
+
+#alarmlogs div{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.alarm-list .item {
+    text-align: left;
+}
+.alarm-list .item h2,.alarm-list .item p {
+    margin-left:20px;
+}
+
+#logo{
+    margin: 20px;
+}
+#video-live{
+    width:100%;
+}
+.warning{
+    color: #ffc900;
+}
+.emergency{
+    color: #e42012;
+}
+.odd {background-color:#c0c0c0;}
+.even {background-color:#eeeeee;}

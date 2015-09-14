@@ -1,0 +1,56 @@
+[
+  {
+    "name":"1号高压配电柜",
+    "sref": "systems.device",
+    "img":"PDG.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"10"
+  },
+  {
+    "name":"2号高压配电柜",
+    "sref": "systems.device",
+    "img":"PDG.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"3号高压配电柜",
+    "sref": "systems.device",
+    "img":"PDG.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"4号高压配电柜",
+    "sref": "systems.device",
+    "img":"PDG.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"4号高压配电柜",
+    "sref": "systems.device",
+    "img":"PDG.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"20"
+  },
+  {
+    "name":"变电箱",
+    "sref": "systems.device",
+    "img":"BDX.png",
+    "p1name":"起停状态",
+    "p1value":"0",
+    "p2name":"参数1",
+    "p2value":"30"
+  }
+]

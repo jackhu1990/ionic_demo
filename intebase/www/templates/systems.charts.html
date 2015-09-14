@@ -1,0 +1,10 @@
+<!--设备报表列表模版-->
+<ion-view view-title="{{title}}" align-title="center">
+    <ion-content>
+        <div class="list">
+            <div class="item" ng-click="quxiantu('#container');">{{tag.name}} 曲线图</div>
+            <div class="item" ng-click="bingtu('#container');">{{tag.name}} 饼图</div>
+        </div>
+        <div id="container"></div>
+    </ion-content>
+</ion-view>
