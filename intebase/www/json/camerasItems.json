@@ -1,46 +1,46 @@
 [
   {
-    "cameraName": "研发中心",
+    "cameraName": "公司前台",
     "cameraId":"1"
   },
   {
-    "cameraName": "公司前台",
+    "cameraName": "研发中心",
     "cameraId":"2"
   },
   {
-    "cameraName": "测试地点",
-    "cameraId":"1003"
+    "cameraName": "摄像机3",
+    "cameraId":"3"
   },
   {
-    "cameraName": "测试地点",
-    "cameraId":"1003"
+    "cameraName": "摄像机4",
+    "cameraId":"4"
   },
   {
-    "cameraName": "测试地点",
-    "cameraId":"1003"
+    "cameraName": "摄像机5",
+    "cameraId":"5"
   },
   {
-    "cameraName": "测试地点",
-    "cameraId":"1003"
+    "cameraName": "摄像机6",
+    "cameraId":"6"
   },
   {
-    "cameraName": "测试地点",
-    "cameraId":"1003"
+    "cameraName": "摄像机7",
+    "cameraId":"7"
   },
   {
-    "cameraName": "测试地点",
-    "cameraId":"1003"
+    "cameraName": "摄像机8",
+    "cameraId":"8"
   },
   {
-    "cameraName": "测试地点",
-    "cameraId":"1003"
+    "cameraName": "摄像机9",
+    "cameraId":"9"
   },
   {
-    "cameraName": "测试地点",
-    "cameraId":"1003"
+    "cameraName": "摄像机10",
+    "cameraId":"10"
   },
   {
-    "cameraName": "测试地点",
-    "cameraId":"1003"
+    "cameraName": "摄像机11",
+    "cameraId":"11"
   }
 ]
