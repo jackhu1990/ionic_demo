@@ -5,7 +5,7 @@
         <button class='button button-balanced' ng-click='stopVideo()'>关闭</button>
     </ion-header-bar>
     <ion-content>
-        <video id='{{liveDivID}}'controls ng-src='{{currentCamera.mediaURL}}' poster="img/poster.png"/>
+        <video id='video-live'controls src='{{currentCamera.mediaURL}}' poster='' style="width:352px;height:288px"/>
         <div class='list'>
             <div class='item'>摄像机名字:{{currentCamera.cameraName}}</div>
             <div class='item'>摄像机ID:{{currentCamera.cameraId}}</div>

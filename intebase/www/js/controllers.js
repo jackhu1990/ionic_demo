@@ -125,8 +125,8 @@ angular.module('ionicApp')
             }
         }
         $scope.myfullScreen = function(){
-            var element = document.getElementById("video-live");//@todo
-            $scope.requestFullSceen(element);
+           var liveDiv = document.getElementById("video-live");
+            $scope.requestFullSceen(liveDiv);
         }
 
         //流媒体服务相关
@@ -195,6 +195,10 @@ angular.module('ionicApp')
                 }
                 else if(action=="live"){
                     $scope.currentCamera.mediaURL = $sce.trustAsResourceUrl(obj["hls"]);
+                    $scope.$apply();
+                    var liveDiv = document.getElementById("video-live");
+                    liveDiv.load();
+                    liveDiv.play();
                     //定时发送心跳
                     $scope.currentCamera.timer1 = setInterval(function(){
                         $scope.beartbeat(obj);
@@ -202,9 +206,9 @@ angular.module('ionicApp')
                 }
             };
             $scope.refreshVideo = function(){
-                var camera =  $scope.currentCamera;
-                $scope.currentCamera.mediaURL = camera.mediaURL;
-                $scope.apply();
+                var liveDiv = document.getElementById("video-live");
+                liveDiv.load();
+                liveDiv.play();
             }
             $scope.startVideo = function(camera){
                 $scope.currentCamera = camera;
@@ -215,6 +219,8 @@ angular.module('ionicApp')
                 clearInterval($scope.currentCamera.timer1);
                 $scope.currentCamera=[];
                 $scope.closeModal();
+                var liveDiv = document.getElementById("video-live");
+                liveDiv.pause();
             }
 
         };
