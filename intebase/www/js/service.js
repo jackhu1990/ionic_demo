@@ -5,7 +5,7 @@ angular.module('ionicApp')
 .factory('loginService',['$rootScope','$state','$ionicPopup',function($rootScope,$state,$ionicPopup){
     return{
             doLogin: function(loginData) {
-                if(loginData.username=="admin" && loginData.password=="admin") {
+                if(loginData.username=="bjzclf" && loginData.password=="bjzclf") {
                     $state.go("alarms",{}, {reload: true});
                     $rootScope.loginSuccess = true;
                 }
