@@ -2,12 +2,12 @@
  * Created by Jackhu on 2015/8/17.
  */
 angular.module('ionicApp')
-.factory('loginService',['$rootScope','$state','$ionicPopup',function($rootScope,$state,$ionicPopup){
+.factory('loginService', ['$rootScope', '$ionicPopup', '$window', function ($rootScope, $ionicPopup, $window) {
     return{
-            doLogin: function(loginData) {
-                if(loginData.username=="bjzclf" && loginData.password=="bjzclf") {
-                    $state.go("alarms",{}, {reload: true});
+        doLogin: function (someone) {
+            if (someone.username == "b" && someone.password == "b") {
                     $rootScope.loginSuccess = true;
+                    return true;
                 }
                 else{
                     var alertPopup = $ionicPopup.alert({
@@ -17,20 +17,22 @@ angular.module('ionicApp')
                     alertPopup.then(function(res) {
                         console.log('密码输入错误');
                     });
+                    return false;
                 }
             },
             doLogout: function(){
-                $state.go("login",{}, {reload: true});
                 $rootScope.loginSuccess = false;
+                return true;
             },
-            getStatus: function() {
+            getLoginStatus: function() {
                 return $rootScope.loginSuccess;
             },
-            autoCheck: function(){
-                if(!$rootScope.loginSuccess){
-                    $state.go("login",{}, {reload: true});
-                }
-            }
+            selectLoginInfo: function (key) {
+                return JSON.parse($window.localStorage[key] || '{}');
+            },
+            upsertLoginInfo: function (key, value) {
+                $window.localStorage[key] = JSON.stringify(value);
+            }      
         }
 }])
 .factory('highcharts',['$rootScope',function($rootScope){
@@ -128,7 +130,7 @@ angular.module('ionicApp')
         }
     }
 }])
-    .factory('stateHelper',['$rootScope','$state',function($rootScope,$state){
+.factory('stateHelper',['$rootScope','$state',function($rootScope,$state){
         return{
             changeState: function(state, pData){
                 $rootScope.stateHelperParams = pData;
@@ -138,4 +140,4 @@ angular.module('ionicApp')
                 return $rootScope.stateHelperParams;
             }
         }
-    }])
+}])

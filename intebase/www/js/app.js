@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('ionicApp', ['ionic','ngResource','ngSanitize'])
+angular.module('ionicApp', ['ionic', 'ngSanitize', 'ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function ($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -17,8 +17,8 @@ angular.module('ionicApp', ['ionic','ngResource','ngSanitize'])
 
     }
     if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleLightContent();
+        // org.apache.cordova.statusbar required
+        StatusBar.styleLightContent();
     }
   });
 })
@@ -42,9 +42,9 @@ angular.module('ionicApp', ['ionic','ngResource','ngSanitize'])
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $urlRouterProvider.when("", "/login");
+    // Each state's controller can be found in controllers.js
 
+  $urlRouterProvider.otherwise("/login");
   $stateProvider
     .state('login', {
         url: '/login',
@@ -69,66 +69,64 @@ angular.module('ionicApp', ['ionic','ngResource','ngSanitize'])
     .state('systems', {
         url: '/systems',
         templateUrl: 'templates/systems.html',
-        controller: 'SystemsCtrl',
-        absolute:true
-      })
-      // Each tab has its own nav history stack:
-      .state('systems.device', {
-          url: '/device/:device', //调用普通模版设备
-          templateUrl: 'templates/systems.device.html',
-          controller: 'SystemsDeviceCtrl'
-      })
-      .state('systems.energydevice', {
-          url: '/energydevice/:device', //特殊自定义模版设备
-          templateUrl: 'templates/systems.device.energy.html',
-          controller: 'SystemsDeviceCtrl'
-      })
-      .state('systems.zmdevice', {
-          url: '/zmdevice/:device', //特殊自定义模版设备
-          templateUrl: 'templates/systems.device.zm.html',
-          controller: 'SystemsDeviceCtrl'
-      })
-      .state('systems.charts', {
-          url: '/charts/:tag',
-          templateUrl: 'templates/systems.charts.html',
-          controller: 'SystemsChartsCtrl'
-      })
-      .state('systems.overview', {
-          url: '/overview',
-          templateUrl: 'templates/systems.overview.html',
-          controller: 'SystemsOverViewCtrl'
-      })
-      .state('systems.ba', {
-          url: '/ba',
-          templateUrl: 'templates/systems.devices.html',
-          controller: 'SystemsBACtrl'
-      })
-      .state('systems.etd', {
-          url: '/etd',
-          templateUrl: 'templates/systems.devices.html',
-          controller: 'SystemsETDCtrl'
-      })
-      .state('systems.zm', {
-          url: '/zm',
-          templateUrl: 'templates/systems.devices.html',
-          controller: 'SystemsZMCtrl'
-      })
-      .state('systems.fas', {
-          url: '/fas',
-          templateUrl: 'templates/systems.devices.html',
-          controller: 'SystemsFASCtrl'
-      })
-      .state('systems.mj', {
-          url: '/mj',
-          templateUrl: 'templates/systems.devices.html',
-          controller: 'SystemsMJCtrl'
-      })
-      .state('systems.energy', {
-          url: '/energy',
-          templateUrl: 'templates/systems.devices.html',
-          controller: 'SystemsENERGYCtrl'
-      });
-
-
+        controller: 'SystemsCtrl'  
+    })
+    .state('systems.overview', {
+        url: '/overview',
+        templateUrl: 'templates/systems.overview.html',
+        controller: 'SystemsOverViewCtrl'
+    })
+    .state('systems.ba', {
+        url: '/ba',
+        templateUrl: 'templates/systems.items.html',
+        controller: 'SystemsBACtrl'
+    })
+    .state('systems.etd', {
+        url: '/etd',
+        templateUrl: 'templates/systems.items.html',
+        controller: 'SystemsETDCtrl'
+    })
+    .state('systems.zm', {
+        url: '/zm',
+        templateUrl: 'templates/systems.items.html',
+        controller: 'SystemsZMCtrl'
+    })
+    .state('systems.fas', {
+        url: '/fas',
+        templateUrl: 'templates/systems.items.html',
+        controller: 'SystemsFASCtrl'
+    })
+    .state('systems.mj', {
+        url: '/mj',
+        templateUrl: 'templates/systems.items.html',
+        controller: 'SystemsMJCtrl'
+    })
+    .state('systems.energy', {
+        url: '/energy',
+        templateUrl: 'templates/systems.items.html',
+        controller: 'SystemsENERGYCtrl'
+    })
+    //子系统的设备（items）中单独某个设备的详细属性列表（items->device）
+    .state('systems.device', {
+        url: '/device/:device',
+        templateUrl: 'templates/systems.device.sample.html',//普通设备属性列表模版
+        controller: 'SystemsDeviceCtrl'
+    })
+    .state('systems.energydevice', {
+        url: '/energydevice/:device',
+        templateUrl: 'templates/systems.device.energy.html',//能源设备属性列表模版
+        controller: 'SystemsDeviceCtrl'
+    })
+    .state('systems.zmdevice', {
+        url: '/zmdevice/:device',
+        templateUrl: 'templates/systems.device.zm.html',//照明设备属性列表模版
+        controller: 'SystemsDeviceCtrl'
+    })
+    .state('systems.chart', {
+        url: '/chart/:tag',
+        templateUrl: 'templates/systems.chart.html',
+        controller: 'SystemsChartCtrl'
+    })
+    ;
   // if none of the above states are matched, use this as the fallback
 });

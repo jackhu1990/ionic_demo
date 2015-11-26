@@ -1,38 +1,30 @@
 <!--子系统背景-->
 <ion-view view-title="{{title}}">
-  <ion-side-menus enable-menu-with-back-views="true">
-    <ion-side-menu-content>
-      <ion-nav-bar class="bar-stable">
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-          </button>
-        </ion-nav-buttons>
-
-        <ion-nav-back-button class="right">
-        </ion-nav-back-button>
-
-      </ion-nav-bar>
-      <ion-nav-view></ion-nav-view>
-    </ion-side-menu-content>
-
-    <ion-side-menu>
-      <!--侧滑页面顶部bar-->
-      <ion-header-bar align-title="center">
-        <h1 class="title">切换子系统</h1>
-        <div class="buttons pull-right" nav-clear menu-close ng-click="settings()">
-          <button class="button button-icon icon ion-gear-b"></button>
-        </div>
-      </ion-header-bar>
-
-      <ion-content>
-        <ion-list>
-          <ion-item  menu-close ng-click="goSystem(systems.overview)">概览</ion-item>
-            <ion-item ng-repeat="systemItem in systemsItems" menu-close ng-click="goSystem(systemItem.sref)">
-                {{systemItem.name}}
-           </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-side-menu>
-  </ion-side-menus>
-
+    <ion-side-menus enable-menu-with-back-views="true" >
+        <ion-side-menu>
+            <!--侧滑页面顶部bar-->
+            <ion-header-bar align-title="center">
+                <h1 class="title">切换子系统</h1>
+            </ion-header-bar>
+            <ion-content>
+                <ion-list>
+                    <ion-item menu-close ng-click="goSystem('systems.overview')">概览</ion-item>
+                    <ion-item ng-repeat="systemItem in systemsItems" menu-close ng-click="goSystem(systemItem.sref)">
+                        {{systemItem.name}}
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-side-menu>
+        <ion-side-menu-content>
+            <ion-nav-bar class="bar-stable">
+                <!--导航栏三样式图标-->
+                <ion-nav-buttons side="right">
+                    <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+                </ion-nav-buttons>
+                <!--导航栏后退图标-->
+                <ion-nav-back-button class="left"></ion-nav-back-button>
+            </ion-nav-bar>
+            <ion-nav-view></ion-nav-view>
+        </ion-side-menu-content>
+    </ion-side-menus>
 </ion-view>

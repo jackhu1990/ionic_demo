@@ -1,48 +1,65 @@
 angular.module('ionicApp')
-    .controller('LoginCtrl',['$scope','$ionicLoading','loginService',function($scope,$ionicLoading,loginService){
-        $scope.title = "请登录系统";
-        $scope.loginData = {};
-        $scope.doLogin = function() {
-            $ionicLoading.show({
-                template: 'Loading...'
-            });
-            loginService.doLogin($scope.loginData);
+    .controller('LoginCtrl', ['$scope', '$ionicLoading', 'loginService', 'stateHelper', '$rootScope', '$state', function ($scope, $ionicLoading, loginService, stateHelper, $rootScope, $state) {
+        $scope.title = "请登录系统";      
+        $rootScope.loginData = loginService.selectLoginInfo("userInfo");
+        $rootScope.goSystem = function (system, param) {
+            stateHelper.changeState(system, param);
+        }
+        $rootScope.autoCheck = function () {
+            if (!loginService.getLoginStatus()) {
+                $rootScope.goSystem('login');
+            }
+        };
+        $scope.doLogin = function (index) {
+            $ionicLoading.show({ template: 'Loading...' });
+            if ($rootScope.loginData) {
+                if (loginService.doLogin($rootScope.loginData)) {
+                    if ($rootScope.loginData.isSave) {
+                        loginService.upsertLoginInfo("userInfo", $rootScope.loginData);
+                    }
+                    $rootScope.goSystem('alarms');
+                }
+            }
             $ionicLoading.hide();
         }
     }])
-    .controller('AlarmsCtrl',['$scope','$http','$ionicLoading','loginService','$ionicPopup','highcharts',function($scope, $http, $ionicLoading,loginService,$ionicPopup,highcharts){
-        loginService.autoCheck();
+    .controller('AlarmsCtrl', ['$scope', '$ionicLoading', '$rootScope', '$ionicPopup','$http', function ($scope, $ionicLoading, $rootScope, $ionicPopup,$http) {
+        $rootScope.autoCheck();
         $ionicLoading.show({
             template: '准备构建实时报警系统...'
         });
         $scope.title = "实时报警";
+        $scope.doRefresh = function () {
+            $http.get("json/alarmLogs.json").success(function (response) {
+                $scope.alarmLogs = response;
+                angular.forEach($scope.alarmLogs, function (item) {
+                    item.$date = moment(new Date(item.almt)).format("YY/MM/DD");
+                    item.$time = moment(new Date(item.almt)).format("HH:mm:ss");
+                    switch (item.almprority) {
+                        case 1:
+                            item.$almprorityName = "普通";
+                            break;
+                        case 2:
+                        case 3:
+                            item.$almprorityName = "警告";
+                            break;
+                        case 4:
+                            item.$almprorityName = "紧急";
+                            break;
+                    }
+                });
+            })
+            .finally(function () {
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+        };
+        $scope.doRefresh();
         $scope.upload = function(){
             var alertPopup = $ionicPopup.alert({
                 title: '上传',
                 template: "报警已上传总部"
             });
         }
-        //restful api
-        //$scope.alarmLogs = $resource("json/alarmLogs.json").query();
-        $http.get("json/alarmLogs.json").success(function(response) {
-            $scope.alarmLogs = response;
-            angular.forEach( $scope.alarmLogs,function(item){
-                item.$date = moment(item.almt).format("YY/MM/DD");
-                item.$time = moment(item.almt).format("HH:mm:ss");
-                switch(item.almprority){
-                    case 1:
-                        item.$almprorityName = "普通";
-                        break;
-                    case 2:
-                    case 3:
-                        item.$almprorityName = "警告";
-                        break;
-                    case 4:
-                        item.$almprorityName = "紧急";
-                        break;
-                }
-            });
-        });
         $scope.ackAlarm = function(alarmlog){
             var alertPopup = $ionicPopup.alert({
                 title: '应答报警!',
@@ -76,16 +93,22 @@ angular.module('ionicApp')
         }
         $ionicLoading.hide();
     }])
-    .controller('VideosCtrl',['$scope','$rootScope','loginService','$ionicModal','$sce','$http',function($scope,$rootScope,loginService,$ionicModal,$sce,$http){
-        loginService.autoCheck();
+    .controller('VideosCtrl',['$scope','$rootScope','$ionicModal','$sce','$http',function($scope,$rootScope,$ionicModal,$sce, $http){
+        $rootScope.autoCheck();
         $scope.title = "实时视频";
         //此地址是读取的cookie的值
         $rootScope.mediaServerIP = "124.205.5.20";
         $rootScope.mediaServerPort = "18080";
         $scope.currentCamera = [];
-        $http.get("json/camerasItems.json").success(function(response) {
-            $scope.camerasItems = response;
-        });
+        $scope.doRefresh = function () {
+            $http.get("json/camerasItems.json").success(function (response) {
+                $scope.camerasItems = response;
+            })
+            .finally(function () {
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+        };
+        $scope.doRefresh();
         //弹窗相关
         $ionicModal.fromTemplateUrl('templates/videos.live.html', {
             scope: $scope,
@@ -225,99 +248,152 @@ angular.module('ionicApp')
 
         };
     }])
-    .controller('SettingsCtrl',['$scope','$rootScope','$ionicLoading','loginService',function($scope,$rootScope,$ionicLoading,loginService){
-        loginService.autoCheck();
+    .controller('SettingsCtrl',['$scope','$rootScope','$ionicLoading','loginService','$cordovaCamera',function($scope,$rootScope,$ionicLoading,loginService,$cordovaCamera){
+        $rootScope.autoCheck();
         $scope.title = "设置";
         $scope.doLogout = function() {
             $ionicLoading.show({
                 template: 'Loading...'
             });
-            loginService.doLogout();
+            if (loginService.doLogout()) {
+                $rootScope.autoCheck();
+            }
             $ionicLoading.hide();
         }
-    }])
-    .controller('SystemsCtrl',['$scope','$http', 'loginService','$rootScope','stateHelper',function($scope, $http,loginService,$rootScope,stateHelper){
-        loginService.autoCheck();
-        $scope.title = "子系统";
-        $http.get("json/systemsItems.json").success(function(response) {
-            $scope.systemsItems = response;
-        });
-        $rootScope.goSystem = function(system,param){
-            stateHelper.changeState(system,param);
+        $scope.takePhoto = function () {
+            var options = {
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: Camera.PictureSourceType.CAMERA,
+            };
+
+            $cordovaCamera.getPicture(options).then(function (imageURI) {
+                $scope.imageSrc = imageURI;
+            }, function (err) {
+                // error  
+            });
         }
-        $rootScope.goSystem('systems.overview');
     }])
-    .controller('SystemsDeviceCtrl',['$scope','stateHelper','loginService',function($scope,stateHelper,loginService){
-        loginService.autoCheck();
-        try{
+    .controller('SystemsCtrl', ['$scope', '$rootScope','$http', function ($scope, $rootScope, $http) {
+        $rootScope.autoCheck();
+        $scope.title = "子系统";
+    }])
+    .controller('SystemsOverViewCtrl', ['$scope', '$rootScope','$http', function ($scope, $rootScope, $http) {
+        $rootScope.autoCheck();
+        $scope.title = "概览";
+        $scope.doRefresh = function () {
+            $http.get("json/systemsItems.json").success(function (response) {
+                $scope.systemsItems = response;
+            })
+           .finally(function () {
+               $scope.$broadcast('scroll.refreshComplete');
+           });
+        };
+        $scope.doRefresh();
+    }])
+    .controller('SystemsBACtrl', ['$scope', '$rootScope','$http', function ($scope, $rootScope,$http) {
+        $rootScope.autoCheck();
+        $scope.title = "楼控";
+        $scope.doRefresh = function () {
+            $http.get("json/baItems.json").success(function (response) {
+                $scope.devicesItems = response;
+            })
+           .finally(function () {
+               $scope.$broadcast('scroll.refreshComplete');
+           });
+        };
+        $scope.doRefresh();
+    }])
+    .controller('SystemsETDCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+        $rootScope.autoCheck();
+        $scope.title = "变配电";
+        $scope.doRefresh = function () {
+            $http.get("json/etdItems.json").success(function (response) {
+                $scope.devicesItems = response;
+            })
+           .finally(function () {
+               $scope.$broadcast('scroll.refreshComplete');
+           });
+        };
+        $scope.doRefresh();
+    }])
+    .controller('SystemsZMCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+        $rootScope.autoCheck();
+        $scope.title = "照明";
+        $scope.doRefresh = function () {
+            $http.get("json/zmItems.json").success(function (response) {
+                $scope.devicesItems = response;
+            })
+           .finally(function () {
+               $scope.$broadcast('scroll.refreshComplete');
+           });
+        };
+        $scope.doRefresh();
+    }])
+    .controller('SystemsFASCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+        $rootScope.autoCheck();
+        $scope.title = "消防报警";
+        $scope.doRefresh = function () {
+            $http.get("json/fasItems.json").success(function (response) {
+                $scope.devicesItems = response;
+            })
+           .finally(function () {
+               $scope.$broadcast('scroll.refreshComplete');
+           });
+        };
+        $scope.doRefresh();
+    }])
+    .controller('SystemsMJCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+        $rootScope.autoCheck();
+        $scope.title = "门禁";
+        $scope.doRefresh = function () {
+            $http.get("json/mjItems.json").success(function (response) {
+                $scope.devicesItems = response;
+            })
+           .finally(function () {
+               $scope.$broadcast('scroll.refreshComplete');
+           });
+        };
+        $scope.doRefresh();
+    }])
+    .controller('SystemsENERGYCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+        $rootScope.autoCheck();
+        $scope.title = "能耗统计";
+        $scope.doRefresh = function () {
+            $http.get("json/energyItems.json").success(function (response) {
+                $scope.devicesItems = response;
+            })
+           .finally(function () {
+               $scope.$broadcast('scroll.refreshComplete');
+           });
+        };
+        $scope.doRefresh();
+    }])
+    .controller('SystemsDeviceCtrl', ['$scope', 'stateHelper', '$rootScope', function ($scope, stateHelper, $rootScope) {
+        $rootScope.autoCheck();
+        try {
             $scope.device = stateHelper.getStateParams();
             $scope.title = $scope.device.name;
-        }catch(e){
+        } catch (e) {
             alert(e.name + ": " + e.message);
             console.log(e);
         }
     }])
-    .controller('SystemsChartsCtrl',['$scope','stateHelper','loginService','highcharts',function($scope,stateHelper,loginService,highcharts){
-        loginService.autoCheck();
-        try{
+    .controller('SystemsChartCtrl', ['$scope', 'stateHelper', '$rootScope', 'highcharts', function ($scope, stateHelper, $rootScope, highcharts) {
+        $rootScope.autoCheck();
+        try {
             $scope.tag = stateHelper.getStateParams();
             $scope.title = $scope.tag.name + "的图表";
-        }catch(e){
+        } catch (e) {
             alert(e.name + ": " + e.message);
             console.log(e);
         }
-        $scope.bingtu = function(cssSelector){
-            var data ="[['Firefox',45.0],['IE',26.8],{name: 'Chrome',y: 12.8,sliced: true,selected: true},['Safari',8.5],['Opera',6.2],['Others',0.7]]";
-            highcharts.bingtu(cssSelector,data);
+        $scope.bingtu = function (cssSelector) {
+            var data = "[['Firefox',45.0],['IE',26.8],{name: 'Chrome',y: 12.8,sliced: true,selected: true},['Safari',8.5],['Opera',6.2],['Others',0.7]]";
+            highcharts.bingtu(cssSelector, data);
         };
-        $scope.quxiantu = function(cssSelector){
+        $scope.quxiantu = function (cssSelector) {
             var data;
-            highcharts.quxiantu(cssSelector,data);
+            highcharts.quxiantu(cssSelector, data);
         }
     }])
-    .controller('SystemsOverViewCtrl',['$scope','loginService',function($scope,loginService){
-        loginService.autoCheck();
-        $scope.title = "概览";
-    }])
-    .controller('SystemsBACtrl',['$scope','loginService','$http',function($scope,loginService,$http){
-        loginService.autoCheck();
-        $scope.title = "楼控";
-        $http.get("json/baDevices.json").success(function(response) {
-            $scope.devicesItems = response;
-        });
-    }])
-    .controller('SystemsETDCtrl',['$scope','loginService','$http',function($scope,loginService,$http){
-        loginService.autoCheck();
-        $scope.title = "变配电";
-        $http.get("json/etdDevices.json").success(function(response) {
-            $scope.devicesItems = response;
-        });
-    }])
-    .controller('SystemsZMCtrl',['$scope','loginService','$http',function($scope,loginService,$http){
-        loginService.autoCheck();
-        $scope.title = "照明";
-        $http.get("json/zmDevices.json").success(function(response) {
-            $scope.devicesItems = response;
-        });
-    }])
-    .controller('SystemsFASCtrl',['$scope','loginService','$http',function($scope,loginService,$http){
-        loginService.autoCheck();
-        $scope.title = "消防报警";
-        $http.get("json/fasDevices.json").success(function(response) {
-            $scope.devicesItems = response;
-        });
-    }])
-    .controller('SystemsMJCtrl',['$scope','loginService','$http',function($scope,loginService,$http){
-        loginService.autoCheck();
-        $scope.title = "门禁";
-        $http.get("json/mjDevices.json").success(function(response) {
-            $scope.devicesItems = response;
-        });
-    }])
-    .controller('SystemsENERGYCtrl',['$scope','loginService','$http',function($scope,loginService,$http){
-        loginService.autoCheck();
-        $scope.title = "能耗统计";
-        $http.get("json/energyDevices.json").success(function(response) {
-            $scope.devicesItems = response;
-        });
-    }])
+    ;

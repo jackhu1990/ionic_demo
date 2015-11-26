@@ -53577,7 +53577,7 @@ IonicModule
  * ## AngularUI Router
  *
  * Please visit [AngularUI Router's docs](https://github.com/angular-ui/ui-router/wiki) for
- * more info. Below is a great videoplayer by the AngularUI Router team that may help to explain
+ * more info. Below is a great video by the AngularUI Router team that may help to explain
  * how it all works:
  *
  * <iframe width="560" height="315" src="//www.youtube.com/embed/dqJRoh8MnBo"

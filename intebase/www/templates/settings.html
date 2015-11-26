@@ -1,15 +1,17 @@
-<ion-view view-title=" {{title}}" align-title="center">
+<ion-view view-title=" {{title}}">
     <ion-content>
        <div class="list list-inset">
            <label class="item item-input">
                <span class="input-label">服务器ip:</span>
-               <input type="text" ng-model="mediaServerIP" placeholder="服务器ip地址" />
+               <input type="text" ng-model="mediaServerIP" placeholder="如192.168.1.254" />
            </label>
            <div class="item">
                <button class="button button-block button-balanced" ng-click="doLogout()">登出</button>
            </div>
-       </div>
-
+           <div class="item" ng-click="takePhoto('imagePersonal')" >
+               <img id="imagePersonal" ng-src="{{imageSrc}}" class="full-image" />  
+           </div>
+       </div>      
+        <div id="transform"></div>
     </ion-content>
-
 </ion-view>

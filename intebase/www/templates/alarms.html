@@ -1,4 +1,4 @@
-<ion-view view-title="{{title}}" align-title="center">
+<ion-view view-title="{{title}}">
 
     <ion-nav-buttons side="right">
         <button class="button button-assertive ion-fireball" ng-click="upload()">
@@ -7,6 +7,9 @@
     </ion-nav-buttons>
 
   <ion-content align="center">
+      <ion-refresher pulling-text="更新报警..."
+                     on-refresh="doRefresh()"  refreshing-icon="ion-load-a">
+      </ion-refresher>
       <!--<div class="alarm-total">-->
           <!--<span id="nornal">普通:234</span>-->
           <!--<span id="warning">严重:15</span>-->
@@ -14,7 +17,7 @@
       <!--</div>-->
 
       <div class="list alarm-list" id="alarmlogs">
-          <div class="item" ng-repeat="alarmlog in alarmLogs" class="item" ng-click="getDetails(alarmlog)" ng-class="{odd:!($index%2),even:($index%2)}">
+          <div class="item" ng-repeat="alarmlog in alarmLogs" ng-click="getDetails(alarmlog)" ng-class="{odd:!($index%2),even:($index%2)}">
               <span>{{alarmlog.$date}}<br />{{alarmlog.$time}}</span>
               <h2>{{alarmlog.almcomment}}</h2>
               <p><span>{{alarmlog.groupname}}</span> <span ng-class="{warning:(alarmlog.almprority==2||alarmlog.almprority==3),emergency:(alarmlog.almprority==4)}">{{alarmlog.$almprorityName}}</span></p>

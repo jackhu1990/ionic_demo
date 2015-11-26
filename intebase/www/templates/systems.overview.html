@@ -1,25 +1,28 @@
-<ion-view view-title="{{title}}" align-title="center">
-  <ion-content>
-     <div class="list list-inset center" id="overview">
-         <div id={{item.id}} class="item inline-block" ng-repeat="item in systemsItems" ng-click="goSystem(item.sref)">
-             <h3>{{item.name}}</a></h3>
-             <div>
-                 <span>{{item.p1name}}</span>
-                 <span>{{item.p1value}}</span>
-             </div>
-             <div>
-                 <span>{{item.p2name}}</span>
-                 <span>{{item.p2value}}</span>
-             </div>
-             <div>
-                 <span>{{item.p3name}}</span>
-                 <span>{{item.p3value}}</span>
-             </div>
-             <div>
-                 <span>{{item.p4name}}</span>
-                 <span>{{item.p4value}}</span>
-             </div>
-         </div>
-     </div>
-  </ion-content>
+<ion-view view-title="{{title}}">
+    <ion-content>
+        <ion-refresher pulling-text="更新子系统..."
+                       on-refresh="doRefresh()" refreshing-icon="ion-load-a">
+        </ion-refresher>
+        <div class="list center" id="overview">
+            <div id={{item.id}} class="item inline-block" ng-repeat="item in systemsItems" ng-click="goSystem(item.sref)">
+                <h3>{{item.name}}</h3>
+                <div>
+                    <span>{{item.p1name}}</span>
+                    <span>{{item.p1value}}</span>
+                </div>
+                <div>
+                    <span>{{item.p2name}}</span>
+                    <span>{{item.p2value}}</span>
+                </div>
+                <div>
+                    <span>{{item.p3name}}</span>
+                    <span>{{item.p3value}}</span>
+                </div>
+                <div>
+                    <span>{{item.p4name}}</span>
+                    <span>{{item.p4value}}</span>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

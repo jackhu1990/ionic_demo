@@ -1,6 +1,9 @@
-<!--单一设备的具体模版-->
-<ion-view view-title={{title}} align-title="center">
+<!--能源设备属性列表模版-->
+<ion-view view-title={{title}}>
     <ion-content>
-        <a ng-click="goSystem('systems.charts',{name:device.p1name,value:device.p1value})"  class="item">{{device.name}}的历史能耗曲线</a>
+        <ion-refresher pulling-text="更新参数..."
+                       on-refresh="doRefresh()">
+        </ion-refresher>
+        <a ng-click="goSystem('systems.chart',{name:device.p1name,value:device.p1value})"  class="item">{{device.name}}的历史能耗曲线</a>
     </ion-content>
 </ion-view>
