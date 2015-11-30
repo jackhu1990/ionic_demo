@@ -5,11 +5,6 @@ angular.module('ionicApp')
         $rootScope.goSystem = function (system, param) {
             stateHelper.changeState(system, param);
         }
-        $rootScope.autoCheck = function () {
-            if (!loginService.getLoginStatus()) {
-                $rootScope.goSystem('login');
-            }
-        };
         $scope.doLogin = function (index) {
             $ionicLoading.show({ template: 'Loading...' });
             if ($rootScope.loginData) {
@@ -24,7 +19,6 @@ angular.module('ionicApp')
         }
     }])
     .controller('AlarmsCtrl', ['$scope', '$ionicLoading', '$rootScope', '$ionicPopup','$http', function ($scope, $ionicLoading, $rootScope, $ionicPopup,$http) {
-        $rootScope.autoCheck();
         $ionicLoading.show({
             template: '准备构建实时报警系统...'
         });
@@ -94,7 +88,6 @@ angular.module('ionicApp')
         $ionicLoading.hide();
     }])
     .controller('VideosCtrl',['$scope','$rootScope','$ionicModal','$sce','$http',function($scope,$rootScope,$ionicModal,$sce, $http){
-        $rootScope.autoCheck();
         $scope.title = "实时视频";
         //此地址是读取的cookie的值
         $rootScope.mediaServerIP = "124.205.5.20";
@@ -249,14 +242,13 @@ angular.module('ionicApp')
         };
     }])
     .controller('SettingsCtrl',['$scope','$rootScope','$ionicLoading','loginService','$cordovaCamera',function($scope,$rootScope,$ionicLoading,loginService,$cordovaCamera){
-        $rootScope.autoCheck();
         $scope.title = "设置";
         $scope.doLogout = function() {
             $ionicLoading.show({
                 template: 'Loading...'
             });
             if (loginService.doLogout()) {
-                $rootScope.autoCheck();
+                $rootScope.goSystem('login');
             }
             $ionicLoading.hide();
         }
@@ -274,11 +266,9 @@ angular.module('ionicApp')
         }
     }])
     .controller('SystemsCtrl', ['$scope', '$rootScope','$http', function ($scope, $rootScope, $http) {
-        $rootScope.autoCheck();
         $scope.title = "子系统";
     }])
     .controller('SystemsOverViewCtrl', ['$scope', '$rootScope','$http', function ($scope, $rootScope, $http) {
-        $rootScope.autoCheck();
         $scope.title = "概览";
         $scope.doRefresh = function () {
             $http.get("json/systemsItems.json").success(function (response) {
@@ -291,7 +281,6 @@ angular.module('ionicApp')
         $scope.doRefresh();
     }])
     .controller('SystemsBACtrl', ['$scope', '$rootScope','$http', function ($scope, $rootScope,$http) {
-        $rootScope.autoCheck();
         $scope.title = "楼控";
         $scope.doRefresh = function () {
             $http.get("json/baItems.json").success(function (response) {
@@ -304,7 +293,6 @@ angular.module('ionicApp')
         $scope.doRefresh();
     }])
     .controller('SystemsETDCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
-        $rootScope.autoCheck();
         $scope.title = "变配电";
         $scope.doRefresh = function () {
             $http.get("json/etdItems.json").success(function (response) {
@@ -317,7 +305,6 @@ angular.module('ionicApp')
         $scope.doRefresh();
     }])
     .controller('SystemsZMCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
-        $rootScope.autoCheck();
         $scope.title = "照明";
         $scope.doRefresh = function () {
             $http.get("json/zmItems.json").success(function (response) {
@@ -330,7 +317,6 @@ angular.module('ionicApp')
         $scope.doRefresh();
     }])
     .controller('SystemsFASCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
-        $rootScope.autoCheck();
         $scope.title = "消防报警";
         $scope.doRefresh = function () {
             $http.get("json/fasItems.json").success(function (response) {
@@ -343,7 +329,6 @@ angular.module('ionicApp')
         $scope.doRefresh();
     }])
     .controller('SystemsMJCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
-        $rootScope.autoCheck();
         $scope.title = "门禁";
         $scope.doRefresh = function () {
             $http.get("json/mjItems.json").success(function (response) {
@@ -356,7 +341,6 @@ angular.module('ionicApp')
         $scope.doRefresh();
     }])
     .controller('SystemsENERGYCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
-        $rootScope.autoCheck();
         $scope.title = "能耗统计";
         $scope.doRefresh = function () {
             $http.get("json/energyItems.json").success(function (response) {
@@ -369,7 +353,6 @@ angular.module('ionicApp')
         $scope.doRefresh();
     }])
     .controller('SystemsDeviceCtrl', ['$scope', 'stateHelper', '$rootScope', function ($scope, stateHelper, $rootScope) {
-        $rootScope.autoCheck();
         try {
             $scope.device = stateHelper.getStateParams();
             $scope.title = $scope.device.name;
@@ -379,7 +362,6 @@ angular.module('ionicApp')
         }
     }])
     .controller('SystemsChartCtrl', ['$scope', 'stateHelper', '$rootScope', 'highcharts', function ($scope, stateHelper, $rootScope, highcharts) {
-        $rootScope.autoCheck();
         try {
             $scope.tag = stateHelper.getStateParams();
             $scope.title = $scope.tag.name + "的图表";

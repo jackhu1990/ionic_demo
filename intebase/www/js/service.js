@@ -8,32 +8,32 @@ angular.module('ionicApp')
             if (someone.username == "b" && someone.password == "b") {
                     $rootScope.loginSuccess = true;
                     return true;
-                }
-                else{
-                    var alertPopup = $ionicPopup.alert({
-                        title: '帐号或密码错误!',
-                        template: '请核实你的帐号密码重新输入'
-                    });
-                    alertPopup.then(function(res) {
-                        console.log('密码输入错误');
-                    });
-                    return false;
-                }
-            },
-            doLogout: function(){
-                $rootScope.loginSuccess = false;
-                return true;
-            },
-            getLoginStatus: function() {
-                return $rootScope.loginSuccess;
-            },
-            selectLoginInfo: function (key) {
-                return JSON.parse($window.localStorage[key] || '{}');
-            },
-            upsertLoginInfo: function (key, value) {
-                $window.localStorage[key] = JSON.stringify(value);
-            }      
+            }
+            else{
+                var alertPopup = $ionicPopup.alert({
+                    title: '帐号或密码错误!',
+                    template: '请核实你的帐号密码重新输入'
+                });
+                alertPopup.then(function(res) {
+                    console.log('密码输入错误');
+                });
+                return false;
+            }
+        },
+        doLogout: function(){
+            $rootScope.loginSuccess = false;
+            return true;
+        },
+        getLoginStatus: function() {
+            return $rootScope.loginSuccess;
+        },
+        selectLoginInfo: function (key) {
+            return JSON.parse($window.localStorage[key] || '{}');
+        },
+        upsertLoginInfo: function (key, value) {
+            $window.localStorage[key] = JSON.stringify(value);
         }
+    }
 }])
 .factory('highcharts',['$rootScope',function($rootScope){
     return {
