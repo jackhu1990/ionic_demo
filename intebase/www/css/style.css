@@ -123,7 +123,9 @@ animation:myfirst 5s;
 .icon-ibms-logo:before {
     content: "\e900";
 }
-
+.icon-ibms-home:before {
+    content: "\e901";
+}
 
 #logo{
     font-size: 78px;
