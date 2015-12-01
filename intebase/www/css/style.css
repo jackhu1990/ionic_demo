@@ -25,10 +25,6 @@ body{
 .alarm-list .item h2,.alarm-list .item p {
     margin-left:20px;
 }
-
-#logo{
-    margin: 20px;
-}
 #video-live{
     width:100%;
 }
@@ -97,4 +93,39 @@ animation:myfirst 5s;
 62%  {background:gray; left:-100px; top:100px;}
 75%  {background:purple; left:-100px; top:0px;}
 100% {background:red; left:0px; top:0px;}
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src:url('fonts/icomoon.eot?c1lhx5');
+    src:url('fonts/icomoon.eot?c1lhx5#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?c1lhx5') format('truetype'),
+    url('fonts/icomoon.woff?c1lhx5') format('woff'),
+    url('fonts/icomoon.svg?c1lhx5#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+[class^="icon-ibms-"], [class*=" icon-ibms-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ibms-logo:before {
+    content: "\e900";
+}
+
+#logo{
+    font-size: 78px;
+    padding: 50px 0px;
+    text-align: center;
 }
