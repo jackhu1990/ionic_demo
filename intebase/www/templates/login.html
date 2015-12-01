@@ -7,17 +7,17 @@
         <div class="list">
             <label class="item item-input item-floating-label">
                 <span class="input-label">用户名</span>
-                <input type="text" placeholder="请输入用户名" ng-model="loginData.username" required>
+                <input type="text" placeholder="请输入用户名" ng-model="loginData.username" >
             </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">密码</span>
-                <input type="password" placeholder="请输入密码" ng-model="loginData.password" required>
+                <input type="password" placeholder="请输入密码" ng-model="loginData.password" >
             </label>
             <label class="item">
                 <input type="checkbox" ng-model="loginData.isSave">是否记住密码
             </label>
             <label class="item">
-                <button class="button button-block button-positive" ng-click="doLogin(loginData)" ng-disable="loginFrom.$invalid">Log in</button>
+                <button class="button button-block button-positive" ng-click="doLogin(loginData)">Log in</button>
             </label>
         </div>
 
