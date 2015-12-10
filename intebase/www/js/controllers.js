@@ -6,7 +6,7 @@ angular.module('ionicApp')
             stateHelper.changeState(system, param);
         }
         $scope.doLogin = function (index) {
-            $ionicLoading.show({ template: '登陆中...' });
+            $ionicLoading.show({ template: '登陆...' });
             if ($rootScope.loginData) {
                 if (loginService.doLogin($rootScope.loginData)) {
                     if ($rootScope.loginData.isSave) {
