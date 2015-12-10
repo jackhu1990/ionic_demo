@@ -6,7 +6,7 @@ angular.module('ionicApp')
             stateHelper.changeState(system, param);
         }
         $scope.doLogin = function (index) {
-            $ionicLoading.show({ template: 'Loading...' });
+            $ionicLoading.show({ template: '登陆中...' });
             if ($rootScope.loginData) {
                 if (loginService.doLogin($rootScope.loginData)) {
                     if ($rootScope.loginData.isSave) {
@@ -20,7 +20,7 @@ angular.module('ionicApp')
     }])
     .controller('AlarmsCtrl', ['$scope', '$ionicLoading', '$rootScope', '$ionicPopup','$http', function ($scope, $ionicLoading, $rootScope, $ionicPopup,$http) {
         $ionicLoading.show({
-            template: '准备构建实时报警系统...'
+            template: '<ion-spinner icon="bubbles" class="spinner-balanced"></ion-spinner>'
         });
         $scope.title = "实时报警";
         $scope.doRefresh = function () {
@@ -253,9 +253,10 @@ angular.module('ionicApp')
             $ionicLoading.hide();
         }
         $scope.takePhoto = function () {
+
             var options = {
                 destinationType: Camera.DestinationType.FILE_URI,
-                sourceType: Camera.PictureSourceType.CAMERA,
+                sourceType: Camera.PictureSourceType.CAMERA
             };
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {
@@ -263,6 +264,7 @@ angular.module('ionicApp')
             }, function (err) {
                 // error  
             });
+
         }
     }])
     .controller('SystemsCtrl', ['$scope', '$rootScope','$http', function ($scope, $rootScope, $http) {

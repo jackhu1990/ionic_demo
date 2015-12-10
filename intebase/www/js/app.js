@@ -57,6 +57,7 @@ angular.module('ionicApp', ['ionic', 'ngSanitize', 'ngCordova'])
       controller: 'AlarmsCtrl'
     })
     .state('videos', {
+      cache:true,
       url: '/videos',
       templateUrl: 'templates/videos.html',
       controller: 'VideosCtrl'
